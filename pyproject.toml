@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tm-oop-lab2"
+version = "1.0.0"
+description = "Лабораторная работа по ООП"
+authors = [
+    {name = "Madina"},
+]
+requires-python = ">=3.9"
+dependencies = [
+    "pytest>=7.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = [
+    "--verbose",
+    "--color=yes",
+    "--strict-markers",
+    "--strict-config",
+]
+pythonpath = ["tasks", "."]
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+include = '\.pyi?$'
+extend-ignore = "E203, W503"
+extend-exclude = '''
+/(
+    \.git
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 88
+known_first_party = ["octal_package"]
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = "E203, W503, E501"
+exclude = [
+    ".git",
+    "__pycache__",
+    ".venv",
+    "venv",
+    "build",
+    "dist",
+]
