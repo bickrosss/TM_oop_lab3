@@ -1,22 +1,12 @@
-[build-system]
-requires = ["setuptools>=61.0.0", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "tm-oop-lab3"
 version = "1.0.0"
 description = "Лабораторная работа по ООП"
-authors = [
-    {name = "Madina"},
-]
 requires-python = ">=3.9"
 
 [project.optional-dependencies]
 dev = [
     "pytest>=7.0.0",
-    "black>=23.0.0",
-    "isort>=5.12.0",
-    "flake8>=6.0.0",
 ]
 
 [tool.pytest.ini_options]
@@ -24,46 +14,5 @@ testpaths = ["tests"]
 python_files = "test_*.py"
 python_classes = "Test*"
 python_functions = "test_*"
-addopts = [
-    "--verbose",
-    "--color=yes",
-    "--strict-markers",
-    "--strict-config",
-    "--import-mode=importlib",
-]
-pythonpath = [
-    ".",
-    "tasks",
-    "tasks/figure_package"
-]
-
-[tool.black]
-line-length = 88
-target-version = ['py39']
-include = '\.pyi?$'
-extend-ignore = "E203, W503"
-extend-exclude = '''
-/(
-    \.git
-  | \.venv
-  | build
-  | dist
-)/
-'''
-
-[tool.isort]
-profile = "black"
-line_length = 88
-known_first_party = ["figure_package"]
-
-[tool.flake8]
-max-line-length = 88
-extend-ignore = "E203, W503, E501"
-exclude = [
-    ".git",
-    "__pycache__",
-    ".venv",
-    "venv",
-    "build",
-    "dist",
-]
+addopts = "-v"
+pythonpath = ["."]
