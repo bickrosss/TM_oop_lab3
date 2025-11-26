@@ -69,7 +69,7 @@ class Long(Pair):
         self.low = int(input("Введите младшую часть числа: "))
     
     def display(self):
-        print(f"Long число: старшая часть={self.high}, младшая часть={self.low}")
+        print(f"Старшая часть={self.high}, младшая часть={self.low}")
     
     def add(self, other):
         if isinstance(other, Long):
@@ -122,7 +122,7 @@ class Long(Pair):
 
 
 if __name__ == '__main__':
-    print("=== Демонстрация класса Pair ===")
+    print("Демонстрация класса Pair")
     p1 = Pair(10, 20)
     p2 = Pair(5, 15)
     
@@ -136,7 +136,7 @@ if __name__ == '__main__':
     print("Сложение пар: ", end="")
     result_pair.display()
     
-    print("\n=== Демонстрация класса Long ===")
+    print("\nДемонстрация класса Long")
     l1 = Long(2, 500)
     l2 = Long(1, 600)
     
@@ -156,7 +156,7 @@ if __name__ == '__main__':
     print("Вычитание Long: ", end="")
     result_sub.display()
     
-    print("\n=== Тестирование переполнения ===")
+    print("\nТестирование переполнения")
     l3 = Long(1, 800)
     l4 = Long(1, 300)
     
@@ -168,7 +168,6 @@ if __name__ == '__main__':
     print("Результат (с обработкой переполнения): ", end="")
     result_overflow.display()
     
-    print("\n=== Работа через ввод с клавиатуры ===")
     print("Создадим новую пару через ввод:")
     p3 = Pair()
     p3.read()

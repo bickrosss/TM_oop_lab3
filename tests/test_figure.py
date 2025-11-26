@@ -43,8 +43,8 @@ class TestRectangle:
         rect = Rectangle(2.0, 3.0)
         result = str(rect)
         assert "Rectangle" in result
-        assert "6.00" in result  # площадь
-        assert "10.00" in result  # периметр
+        assert "6.00" in result
+        assert "10.00" in result
 
 
 class TestCircle:
@@ -84,8 +84,8 @@ class TestCircle:
         circle = Circle(2.0)
         result = str(circle)
         assert "Circle" in result
-        assert "12.57" in result  # площадь примерно
-        assert "12.57" in result  # периметр примерно
+        assert "12.57" in result
+        assert "12.57" in result
 
 class TestTrapezium:
 
@@ -105,7 +105,6 @@ class TestTrapezium:
     def test_perimeter(self):
         """Тест вычисления периметра трапеции"""
         trap = Trapezium(5.0, 3.0, 4.0)
-        # Для равнобедренной трапеции
         expected_side = math.sqrt(((5.0 - 3.0) / 2) ** 2 + 4.0 ** 2)
         expected_perimeter = 5.0 + 3.0 + 2 * expected_side
         assert trap.perimeter() == expected_perimeter
@@ -121,15 +120,15 @@ class TestTrapezium:
             Trapezium(-1.0, 4.0, 3.0)
         
         with pytest.raises(ValueError):
-            Trapezium(5.0, 5.0, 3.0)  # равные основания
+            Trapezium(5.0, 5.0, 3.0)
 
     def test_str_representation(self):
         """Тест строкового представления"""
         trap = Trapezium(5.0, 3.0, 4.0)
         result = str(trap)
         assert "Trapezium" in result
-        assert "16.00" in result  # площадь
-        assert "16.25" in result  # периметр (округленный до 2 знаков)
+        assert "16.00" in result
+        assert "16.25" in result
 
 class TestReader:
 
@@ -173,7 +172,6 @@ class TestInheritanceAndAbstract:
         circle = Circle(1.0)
         trap = Trapezium(3.0, 2.0, 1.0)
 
-        # Проверяем, что все методы работают
         assert rect.area() > 0
         assert rect.perimeter() > 0
         assert isinstance(rect.is_valid(), bool)
@@ -224,14 +222,11 @@ def test_multiple_objects():
 
 def test_edge_cases():
     """Тест граничных случаев"""
-    # Маленькие значения
     rect_small = Rectangle(0.1, 0.1)
     assert rect_small.area() > 0
 
-    # Проверка периметра
     rect_square = Rectangle(2.0, 2.0)
     assert rect_square.perimeter() == 8.0
-
 
 def test_calculation_accuracy():
     """Тест точности вычислений"""
@@ -246,8 +241,6 @@ def test_calculation_accuracy():
     trap = Trapezium(4.0, 2.0, 3.0)
     assert trap.area() == 9.0
 
-
-# Фикстуры для удобного тестирования
 @pytest.fixture
 def sample_rectangle():
     return Rectangle(3.0, 4.0)
