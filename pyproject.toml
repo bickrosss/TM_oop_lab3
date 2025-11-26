@@ -10,12 +10,10 @@ authors = [
     {name = "Madina"},
 ]
 requires-python = ">=3.9"
-dependencies = [
-    "pytest>=7.0.0",
-]
 
 [project.optional-dependencies]
 dev = [
+    "pytest>=7.0.0",
     "black>=23.0.0",
     "isort>=5.12.0",
     "flake8>=6.0.0",
