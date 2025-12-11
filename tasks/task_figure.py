@@ -20,8 +20,10 @@ def create_figures_with_reader():
     print("\nСоздание трапеции:")
     base1 = reader.read_float("Введите первое основание: ")
     base2 = reader.read_float("Введите второе основание: ")
+    side1 = reader.read_float("Введите первую боковую сторону: ")
+    side2 = reader.read_float("Введите вторую боковую сторону: ")
     height = reader.read_float("Введите высоту: ")
-    figures.append(Trapezium(base1, base2, height))
+    figures.append(Trapezium(base1, base2, side1, side2, height))
     
     return figures
 
