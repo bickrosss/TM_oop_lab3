@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from figure_package.figure import Figure, Rectangle, Circle, Trapezium, Reader, demonstrate_virtual_call
+from figure_package.figure import Figure, Rectangle, Circle, Trapezium, Reader
 
 def main():
     print("ДЕМОНСТРАЦИЯ НАСЛЕДОВАНИЯ И ПОЛИМОРФИЗМА") 
@@ -37,12 +37,8 @@ def main():
         print(f"\nФигура #{i} ({type(figure).__name__})")
         print(f"Площадь: {figure.area():.2f}")
         print(f"Периметр: {figure.perimeter():.2f}")
-    print("\n3. ДЕМОНСТРАЦИЯ ВИРТУАЛЬНЫХ ВЫЗОВОВ:")
-    
-    for figure in figures:
-        demonstrate_virtual_call(figure)
 
-    print("\n4. РАБОТА СО СВОЙСТВАМИ:")
+    print("\n3. РАБОТА СО СВОЙСТВАМИ:")
     
     print("\nИзменение свойств прямоугольника")
     print(f"Текущие значения: ширина={rect.width}, высота={rect.height}")
@@ -59,7 +55,7 @@ def main():
     print(f"Площадь: {rect.area():.2f}")
     print(f"Периметр: {rect.perimeter():.2f}")
     
-    print("\n5. РАБОТА ЧЕРЕЗ БАЗОВЫЙ КЛАСС FIGURE:")
+    print("\n4. РАБОТА ЧЕРЕЗ БАЗОВЫЙ КЛАСС FIGURE:")
     
     for i, figure in enumerate(figures, 1):
         print(f"\nФигура {i} через базовый класс Figure:")
