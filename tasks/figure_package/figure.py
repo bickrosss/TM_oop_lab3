@@ -2,97 +2,172 @@
 # -*- coding: utf-8 -*-
 
 from abc import ABC, abstractmethod
-from math import pi, sqrt
+from math import pi
+
 
 class Reader:
     @staticmethod
-    def read_float(prompt):
-        while True:
-            try:
-                return float(input(prompt))
-            except ValueError:
-                print("Ошибка: введите число")
-    
-    @staticmethod
-    def read_int(prompt):
-        while True:
-            try:
-                return int(input(prompt))
-            except ValueError:
-                print("Ошибка: введите целое число")
+    def read_float(prompt: str) -> float:
+        return float(input(prompt))
+
 
 class Figure(ABC):
     @abstractmethod
-    def area(self):
+    def area(self) -> float:
         pass
     
     @abstractmethod
-    def perimeter(self):
+    def perimeter(self) -> float:
         pass
     
     @abstractmethod
-    def is_valid(self):
+    def __str__(self) -> str:
         pass
-    
-    def __str__(self):
-        return f"{self.__class__.__name__}: площадь = {self.area():.2f}, периметр = {self.perimeter():.2f}"
+
 
 class Rectangle(Figure):
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
-        if not self.is_valid():
-            raise ValueError("Некорректные параметры прямоугольника")
+    def __init__(self, width: float = 0, height: float = 0):
+        self.__width = width
+        self.__height = height
     
-    def is_valid(self):
-        return self.width > 0 and self.height > 0
+    @property
+    def width(self) -> float:
+        return self.__width
     
-    def area(self):
-        return self.width * self.height
+    @property
+    def height(self) -> float:
+        return self.__height
     
-    def perimeter(self):
-        return 2 * (self.width + self.height)
+    @width.setter
+    def width(self, value: float) -> None:
+        if value <= 0:
+            raise ValueError("Ширина должна быть положительной")
+        self.__width = value
+    
+    @height.setter
+    def height(self, value: float) -> None:
+        if value <= 0:
+            raise ValueError("Высота должна быть положительной")
+        self.__height = value
+    
+    def area(self) -> float:
+        return self.__width * self.__height
+    
+    def perimeter(self) -> float:
+        return 2 * (self.__width + self.__height)
+    
+    def __str__(self) -> str:
+        return (
+            f"Прямоугольник:\n"
+            f"  Ширина: {self.__width}\n"
+            f"  Высота: {self.__height}\n"
+            f"  Площадь: {self.area():.2f}\n"
+            f"  Периметр: {self.perimeter():.2f}"
+        )
+
 
 class Circle(Figure):
-    def __init__(self, radius):
-        self.radius = radius
-        if not self.is_valid():
-            raise ValueError("Некорректный параметр круга")
+    def __init__(self, radius: float = 0):
+        self.__radius = radius
     
-    def is_valid(self):
-        return self.radius > 0
+    @property
+    def radius(self) -> float:
+        return self.__radius
     
-    def area(self):
-        return pi * self.radius ** 2
+    @radius.setter
+    def radius(self, value: float) -> None:
+        if value <= 0:
+            raise ValueError("Радиус должен быть положительным")
+        self.__radius = value
     
-    def perimeter(self):
-        return 2 * pi * self.radius
+    def area(self) -> float:
+        return pi * self.__radius ** 2
+    
+    def perimeter(self) -> float:
+        return 2 * pi * self.__radius
+    
+    def __str__(self) -> str:
+        return (
+            f"Круг:\n"
+            f"  Радиус: {self.__radius}\n"
+            f"  Площадь: {self.area():.2f}\n"
+            f"  Периметр (длина окружности): {self.perimeter():.2f}"
+        )
+
 
 class Trapezium(Figure):
-    def __init__(self, base1, base2, height):
-        self.base1 = base1
-        self.base2 = base2
-        self.height = height
-        # Вычисляем боковые стороны (для упрощения считаем равнобедренной)
-        self.side = sqrt(((base1 - base2) / 2) ** 2 + height ** 2)
-        if not self.is_valid():
-            raise ValueError("Некорректные параметры трапеции")
+    def __init__(self, base1: float = 0, base2: float = 0, 
+                 side1: float = 0, side2: float = 0, height: float = 0):
+        self.__base1 = base1
+        self.__base2 = base2
+        self.__side1 = side1
+        self.__side2 = side2
+        self.__height = height
     
-    def is_valid(self):
-        # Все параметры положительные и основания разные
-        return (self.base1 > 0 and self.base2 > 0 and 
-                self.height > 0 and self.base1 != self.base2)
+    @property
+    def base1(self) -> float:
+        return self.__base1
     
-    def area(self):
-        return (self.base1 + self.base2) * self.height / 2
+    @property
+    def base2(self) -> float:
+        return self.__base2
     
-    def perimeter(self):
-        return self.base1 + self.base2 + 2 * self.side
-
-def demonstrate_virtual_call(figure: Figure):
-    """Функция, демонстрирующая виртуальный вызов"""
-    print(f"Виртуальный вызов для {figure.__class__.__name__}:")
-    print(f"  Площадь: {figure.area():.2f}")
-    print(f"  Периметр: {figure.perimeter():.2f}")
-    print(f"  Корректность: {'Да' if figure.is_valid() else 'Нет'}")
-    print()
+    @property
+    def side1(self) -> float:
+        return self.__side1
+    
+    @property
+    def side2(self) -> float:
+        return self.__side2
+    
+    @property
+    def height(self) -> float:
+        return self.__height
+    
+    @base1.setter
+    def base1(self, value: float) -> None:
+        if value <= 0:
+            raise ValueError("Основание должно быть положительным")
+        self.__base1 = value
+    
+    @base2.setter
+    def base2(self, value: float) -> None:
+        if value <= 0:
+            raise ValueError("Основание должно быть положительным")
+        self.__base2 = value
+    
+    @side1.setter
+    def side1(self, value: float) -> None:
+        if value <= 0:
+            raise ValueError("Боковая сторона должна быть положительной")
+        self.__side1 = value
+    
+    @side2.setter
+    def side2(self, value: float) -> None:
+        if value <= 0:
+            raise ValueError("Боковая сторона должна быть положительной")
+        self.__side2 = value
+    
+    @height.setter
+    def height(self, value: float) -> None:
+        if value <= 0:
+            raise ValueError("Высота должна быть положительной")
+        self.__height = value
+    
+    def area(self) -> float:
+        return (self.__base1 + self.__base2) * self.__height / 2
+    
+    def perimeter(self) -> float:
+        return self.__base1 + self.__base2 + self.__side1 + self.__side2
+    
+    def __str__(self) -> str:
+        return (
+            f"Трапеция:\n"
+            f"  Верхнее основание: {self.__base1}\n"
+            f"  Нижнее основание: {self.__base2}\n"
+            f"  Боковая сторона 1: {self.__side1}\n"
+            f"  Боковая сторона 2: {self.__side2}\n"
+            f"  Высота: {self.__height}\n"
+            f"  Площадь: {self.area():.2f}\n"
+            f"  Периметр: {self.perimeter():.2f}"
+        )
